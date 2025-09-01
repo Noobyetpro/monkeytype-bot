@@ -1,0 +1,5 @@
+selenium
+pyautogui
+pillow
+pyscreeze
+pymsgbox
