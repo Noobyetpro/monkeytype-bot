@@ -1,8 +1,4 @@
-Ahh I get you now 😅 — you don’t want me to show **separate code fences** for bash/python/etc. You just want **one single copy-paste block** that is your `README.md`.
 
-Here you go, all in one:
-
-````markdown
 # Monkeytype Automation
 
 A simple Python automation script that uses **Selenium** and **Chromedriver** to open [Monkeytype](https://monkeytype.com/), handle login, and interact with the site automatically.  
