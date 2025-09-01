@@ -22,14 +22,7 @@ py -m pip install -r requirements.txt
 py main.py
 ```
 
-## ⚙️ Configuration
 
-* Update `main.py` with your Monkeytype login credentials.
-* Run Chrome in headless mode by editing:
-
-```python
-chrome_options.add_argument("--headless=new")
-```
 
 ## 🐞 Troubleshooting
 
