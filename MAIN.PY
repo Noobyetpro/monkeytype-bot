@@ -8,21 +8,21 @@ import pyautogui
 import time
 import os
 
-# Setup WebDriver
+
 def init_driver(path="chromedriver.exe"):
     chrome_options = Options()
-    # Use a fresh temporary profile so login always appears
+
     chrome_options.add_argument("--user-data-dir=" + os.path.join(os.getcwd(), "selenium_temp_profile"))
     service = Service(path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.maximize_window()
     return driver
 
-# Login function
+
 def login(driver):
     driver.get("https://monkeytype.com/")
 
-    # Wait and accept cookies if present
+
     try:
         cookie_btn = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.ID, "cookiePopupAccept"))
@@ -31,7 +31,7 @@ def login(driver):
     except:
         print("No cookies popup found")
 
-    # Wait for login button
+
     try:
         login_btn = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "a.textButton[onclick*='openLogin']"))
@@ -41,11 +41,10 @@ def login(driver):
         print("Login button not found")
         return
 
-    # Prompt user for credentials
     user = pyautogui.prompt("Enter your username/email: ")
     pasw = pyautogui.password("Enter your password: ")
 
-    # Fill login form
+
     email_input = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.NAME, "email"))
     )
@@ -57,7 +56,7 @@ def login(driver):
     driver.find_element(By.CSS_SELECTOR, "button.textButton").click()
     print("Logged in!")
 
-# Typing words
+
 def write_words(driver, delay=0.05):
     try:
         while True:
@@ -72,14 +71,14 @@ def play_round(driver, delay):
     time.sleep(3)
     write_words(driver, delay)
 
-# Collect results
+
 def collect_results(driver):
     wpm = driver.find_element(By.CSS_SELECTOR, ".group.wpm .bottom").text
     acc = driver.find_element(By.CSS_SELECTOR, ".group.acc .bottom").text
     consis = driver.find_element(By.CSS_SELECTOR, ".group.consistency .bottom").text
     return wpm, acc, consis
 
-# Display results
+
 def display_results(data):
     keys = list(data.keys())
     print(*keys, sep="\t")
@@ -87,7 +86,7 @@ def display_results(data):
         print(*(data[key][i] for key in keys), sep="\t\t")
     print("-" * 40)
 
-# Main flow
+
 if __name__ == "__main__":
     driver = init_driver()
     data = {"wpm": [], "accu": [], "consis": [], "delay": []}
@@ -110,5 +109,6 @@ if __name__ == "__main__":
 
     finally:
         driver.quit()
+
 
 
